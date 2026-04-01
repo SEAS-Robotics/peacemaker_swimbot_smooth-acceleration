@@ -1246,6 +1246,7 @@ basic.forever(function () {
         )
         if (_system_Hw_DeviceType__Now__Id_Int == _system_Hw_DeviceType__Controller_Joystick__ID_INT && (_system_Sw_ModeState__Now__Id_Int == _system_Sw_ModeState__Run__AndShow_01_DeviceType__ID_INT || _system_Sw_ModeState__Now__Id_Int == _system_Sw_ModeState__Run__AndShow_02_GroupChannelNum__ID_INT)) {
             if (joystickbit.getButton(joystickbit.JoystickBitPin.P13)) {
+                // Button "D" press handler.
                 images.createImage(`
                     # . . . .
                     . # . . .
@@ -1259,6 +1260,7 @@ basic.forever(function () {
                 )
                 controller__Polar_OriginAtCenter__MagnitudePixel__PreviousCycles_IdleCount__Int = 0
             } else if (joystickbit.getButton(joystickbit.JoystickBitPin.P12)) {
+                // Button "C" press handler.
                 images.createImage(`
                     . . . . .
                     . . . . .
