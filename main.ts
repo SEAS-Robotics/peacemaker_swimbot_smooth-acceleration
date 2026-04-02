@@ -10,24 +10,24 @@ function bot_Tap_To_Turn_fn (network_ReceivedString_FromControllerJoystick_Str_P
     if (network_ReceivedString_FromControllerJoystick_Str_ParamIn == "tap_left") {
         // Button "D" press handler.
         images.createImage(`
-            . . # . .
-            . # . . .
-            # . . # #
-            . # . . .
-            . . # . .
+            # # # . .
+            # # . . .
+            # . # . .
+            . . . # .
+            . . . . #
             `).showImage(0, 0)
-        tap_left_turn_bias = 1
+        tap_left_turn_bias = 0.7
         tap_right_turn_bias = 1
     } else if (network_ReceivedString_FromControllerJoystick_Str_ParamIn == "tap_right") {
         images.createImage(`
-            . . # . .
-            . . . # .
-            # # . . #
-            . . . # .
-            . . # . .
+            . . # # #
+            . . . # #
+            . . # . #
+            . # . . .
+            # . . . .
             `).showImage(0, 0)
         tap_left_turn_bias = 1
-        tap_right_turn_bias = 1
+        tap_right_turn_bias = 0.7
     } else {
         images.createImage(`
             . . . . .
@@ -36,6 +36,8 @@ function bot_Tap_To_Turn_fn (network_ReceivedString_FromControllerJoystick_Str_P
             . . . . .
             . . . . .
             `).showImage(0, 0)
+        tap_left_turn_bias = 1
+        tap_right_turn_bias = 1
     }
 }
 function screen_Clear_Func () {
@@ -105,7 +107,7 @@ function bot_Servo_Motors_Basic_Fn (network_ReceivedString_FromControllerJoystic
             quest_Note_1.quest_Show_String_For_Note_Small_Func(
             "user is holding stick forward - accelerate and hold"
             )
-            if (normal_accel_speed < max_normal_speed / 2) {
+            if (normal_accel_speed < max_normal_speed * 0.7) {
                 quest_Note_1.quest_Show_String_For_Note_Small_Func(
                 "Still accelerating - increment speed"
                 )
@@ -121,11 +123,14 @@ function bot_Servo_Motors_Basic_Fn (network_ReceivedString_FromControllerJoystic
                 }
             }
         }
+        quest_Note_1.quest_Show_String_For_Note_Small_Func(
+        "Motors reversed on Swim Bot"
+        )
         // //jwc o roboQuest.powerMotorsViaBlueRedBlackPins(PortGroup_BlueRedBlack__PortIds__Enum.S1_MotorLeft__S0_MotorRight, motor_Power_ZERO_INT, motor_Power_ZERO_INT)
         quest_Motors.quest_Set_PowerMotorsViaBlueRedBlackPins_Func(
         quest_PortGroup_BlueRedBlack_PortIds_Enum.S1_MotorLeft__S0_MotorRight,
-        normal_accel_speed,
-        normal_accel_speed
+        normal_accel_speed * tap_right_turn_bias,
+        normal_accel_speed * tap_left_turn_bias
         )
     } else if (network_ReceivedString_FromControllerJoystick_Str_ParamIn == "backward") {
         images.createImage(`
@@ -167,8 +172,8 @@ function bot_Servo_Motors_Basic_Fn (network_ReceivedString_FromControllerJoystic
         // //jwc o roboQuest.powerMotorsViaBlueRedBlackPins(PortGroup_BlueRedBlack__PortIds__Enum.S1_MotorLeft__S0_MotorRight, motor_Power_ZERO_INT, motor_Power_ZERO_INT)
         quest_Motors.quest_Set_PowerMotorsViaBlueRedBlackPins_Func(
         quest_PortGroup_BlueRedBlack_PortIds_Enum.S1_MotorLeft__S0_MotorRight,
-        normal_accel_speed,
-        normal_accel_speed
+        normal_accel_speed * tap_left_turn_bias,
+        normal_accel_speed * tap_right_turn_bias
         )
     } else if (network_ReceivedString_FromControllerJoystick_Str_ParamIn == "left") {
         last_joystick_command = 0
@@ -774,8 +779,8 @@ turbo_mode = 0
 // The accel ramp doesn't have to start at 0. Initial testing showed that while setting any value from 0 to 100 is possible, starting speeds of over 20 caused tire slippage.  This condition can vary by terrain type.
 normal_start_speed = 20
 // This variable controls the rate of the acceleration ramp-- how long the bot takes to get from zero to max. In initial testing 1 worked well, 2 produced tire slippage.
-accel_rate = 1
-max_normal_speed = 60
+accel_rate = 5
+max_normal_speed = 99
 // This value will determine the maximum speed to which the bot will accelerate before topping out. Valid range is 0 to 100.
 max_turbo_speed = 99
 quest_Note_4.quest_Show_String_For_Note_Small_Func(
