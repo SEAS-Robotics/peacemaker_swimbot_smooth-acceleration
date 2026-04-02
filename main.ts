@@ -1226,11 +1226,11 @@ basic.forever(function () {
             if (joystickbit.getButton(joystickbit.JoystickBitPin.P12)) {
                 // Button "D" press handler.
                 images.createImage(`
-                    . . # . .
-                    . # . . .
-                    # . . # #
-                    . # . . .
-                    . . # . .
+                    # # # . .
+                    # # . . .
+                    # . # . .
+                    . . . # .
+                    . . . . #
                     `).showImage(0, 0)
                 radio.sendString("tap_left")
                 quest_Note_1.quest_Show_String_For_Note_Small_Func(
@@ -1240,11 +1240,11 @@ basic.forever(function () {
             } else if (joystickbit.getButton(joystickbit.JoystickBitPin.P13)) {
                 // Button "C" press handler.
                 images.createImage(`
-                    . . # . .
-                    . . . # .
-                    # # . . #
-                    . . . # .
-                    . . # . .
+                    . . # # #
+                    . . . # #
+                    . . # . #
+                    . # . . .
+                    # . . . .
                     `).showImage(0, 0)
                 radio.sendString("tap_right")
                 quest_Note_1.quest_Show_String_For_Note_Small_Func(
