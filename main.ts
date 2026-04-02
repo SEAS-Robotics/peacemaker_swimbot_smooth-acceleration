@@ -8,37 +8,30 @@ function screen_PlotNewDot_ClearOldDot_WithHeartbeat_Func (screen_x_new_num: num
 }
 function bot_Tap_To_Turn_fn (network_ReceivedString_FromControllerJoystick_Str_ParamIn: string) {
     if (network_ReceivedString_FromControllerJoystick_Str_ParamIn == "tap_left") {
+        // Button "D" press handler.
         images.createImage(`
-            # . . . .
+            . . # . .
+            . # . . .
+            # . . # #
             . # . . .
             . . # . .
-            . . . . .
-            . . . . .
             `).showImage(0, 0)
-        quest_Note_1.quest_Show_String_For_Note_Small_Func(
-        "If [0|360] is jittery, insure battery at 75% power min."
-        )
-        quest_Note_1.quest_Show_String_For_Note_Small_Func(
-        "GeekServo-360-Degrees-2kg:360-degrees(not 180-degrees)"
-        )
+        tap_left_turn_bias = 1
+        tap_right_turn_bias = 1
     } else if (network_ReceivedString_FromControllerJoystick_Str_ParamIn == "tap_right") {
         images.createImage(`
-            . . . . .
-            . . . . .
             . . # . .
-            . # . . .
-            # . . . .
-            `).showImage(0, 0)
-        quest_Note_1.quest_Show_String_For_Note_Small_Func(
-        "If [0|360] is jittery, insure battery at 75% power min."
-        )
-        quest_Note_1.quest_Show_String_For_Note_Small_Func(
-        "GeekServo-360-Degrees-2kg:360-degrees(not 180-degrees)"
-        )
-    } else if (network_ReceivedString_FromControllerJoystick_Str_ParamIn == "arm_back") {
-        images.createImage(`
-            . . . . #
             . . . # .
+            # # . . #
+            . . . # .
+            . . # . .
+            `).showImage(0, 0)
+        tap_left_turn_bias = 1
+        tap_right_turn_bias = 1
+    } else {
+        images.createImage(`
+            . . . . .
+            . . . . .
             . . # . .
             . . . . .
             . . . . .
@@ -748,6 +741,8 @@ let screenBrightness_Heartbeat_Count_Int = 0
 let screen_XY_Brightness_Old_Num = 0
 let screen_Y_Old_Num = 0
 let screen_X_Old_Num = 0
+let tap_right_turn_bias = 0
+let tap_left_turn_bias = 0
 let max_turbo_speed = 0
 let max_normal_speed = 0
 let accel_rate = 0
@@ -786,8 +781,8 @@ max_turbo_speed = 99
 quest_Note_4.quest_Show_String_For_Note_Small_Func(
 "Tap-to-turn variables"
 )
-let tap_left_turn_bias = 1
-let tap_right_turn_bias = 1
+tap_left_turn_bias = 1
+tap_right_turn_bias = 1
 quest_Note_1.quest_Show_String_For_Note_Big_Func(
 "Below, Setup Code for Student:"
 )
