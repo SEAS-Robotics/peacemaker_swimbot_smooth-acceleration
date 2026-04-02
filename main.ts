@@ -238,11 +238,11 @@ function bot_Servo_Motors_Turbo_Fn (network_ReceivedString_FromControllerJoystic
         turbo_mode = 1
     } else if (network_ReceivedString_FromControllerJoystick_Str_ParamIn == "turbo_off") {
         images.createImage(`
-            # . # # .
-            . # . . #
-            # . # . #
-            # . . # .
-            . # # . #
+            . . . . .
+            . . . . .
+            . . # . .
+            . . . . .
+            . . . . .
             `).showImage(0, 0)
         turbo_mode = 0
     }
