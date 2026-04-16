@@ -144,11 +144,14 @@ function bot_Servo_Motors_Basic_Fn (network_ReceivedString_FromControllerJoystic
             quest_Note_1.quest_Show_String_For_Note_Small_Func(
             "Command U turn motor speeds"
             )
+            quest_Note_1.quest_Show_String_For_Note_Small_Func(
+            "Note Peacemaker bot has reversed turn logic"
+            )
             // //jwc o roboQuest.powerMotorsViaBlueRedBlackPins(PortGroup_BlueRedBlack__PortIds__Enum.S1_MotorLeft__S0_MotorRight, motor_Power_ZERO_INT, motor_Power_ZERO_INT)
             quest_Motors.quest_Set_PowerMotorsViaBlueRedBlackPins_Func(
             quest_PortGroup_BlueRedBlack_PortIds_Enum.S1_MotorLeft__S0_MotorRight,
-            18,
-            99
+            60,
+            11
             )
             quest_Note_1.quest_Show_String_For_Note_Small_Func(
             "After U-turn must restart accel curve from start"
